@@ -102,4 +102,10 @@ class Book {
       infoLink: jsonObject['infoLink'] as String,
     );
   }
+
+  @override
+  String toString() {
+    // TODO: implement toString
+    return "Book: ${this.title}";
+  }
 }
