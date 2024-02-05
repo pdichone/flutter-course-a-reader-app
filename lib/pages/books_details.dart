@@ -55,6 +55,39 @@ class _BookDetailsScreenState extends State<BookDetailsScreen> {
                   Text(
                     'Language: ${book.language}',
                     style: theme.bodySmall,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      ElevatedButton(onPressed: () {}, child: Text('Save')),
+                      ElevatedButton.icon(
+                          onPressed: () {},
+                          icon: Icon(Icons.favorite),
+                          label: Text('Favorite'))
+                    ],
+                  ),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  Text(
+                    'Description',
+                    style: theme.titleMedium,
+                  ),
+                  const SizedBox(
+                    height: 5,
+                  ),
+                  Container(
+                    margin: EdgeInsets.all(10),
+                    padding: EdgeInsets.all(10),
+                    decoration: BoxDecoration(
+                        color: Theme.of(context)
+                            .colorScheme
+                            .secondary
+                            .withOpacity(0.1),
+                        borderRadius: BorderRadius.circular(10),
+                        border: Border.all(
+                            color: Theme.of(context).colorScheme.secondary)),
+                    child: Text(book.description),
                   )
                 ],
               )

@@ -25,7 +25,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
       // print("Books: ${books.toString()}");
     } catch (e) {
-      print("Didn't get anything...");
+      
     }
     setState(() {}); // go ahead and rebuild the widget
   }
@@ -47,22 +47,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 onSubmitted: (query) => _searchBooks(query),
               ),
             ),
-
             GridViewWidget(books: _books)
-            // Expanded(
-            //   child: SizedBox(
-            //     width: double.infinity,
-            //     child: ListView.builder(
-            //         itemCount: _books.length,
-            //         itemBuilder: (context, index) {
-            //           Book book = _books[index];
-            //           return ListTile(
-            //             title: Text(book.title),
-            //             subtitle: Text(book.authors.join(', & ') ?? ''),
-            //           );
-            //         }),
-            //   ),
-            // )
           ],
         ),
       ),
