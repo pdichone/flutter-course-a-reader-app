@@ -65,7 +65,7 @@ class Book {
       'publisher': publisher,
       'publishedDate': publishedDate,
       'description': description,
-      'favorite': isFavorite ? 1 : 0,
+      // 'favorite': isFavorite ? 1 : 0,
       'industryIdentifiers':
           json.encode(industryIdentifiers), // Serialize map to a JSON string
       'pageCount': pageCount,
@@ -97,7 +97,7 @@ class Book {
       imageLinks: jsonObject['imageLinks'] is String
           ? Map.from(json.decode(jsonObject['imageLinks']))
           : {},
-      isFavorite: (jsonObject['favorite'] as int) == 1,
+      // isFavorite: (jsonObject['favorite'] as int) == 1,
       previewLink: jsonObject['previewLink'] as String,
       infoLink: jsonObject['infoLink'] as String,
     );
