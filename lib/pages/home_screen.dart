@@ -44,20 +44,41 @@ class _HomeScreenState extends State<HomeScreen> {
                 onSubmitted: (query) => _searchBooks(query),
               ),
             ),
+
             Expanded(
-              child: Container(
-                width: double.infinity,
-                child: ListView.builder(
+                child: GridView.builder(
                     itemCount: _books.length,
+                    gridDelegate:
+                        const SliverGridDelegateWithFixedCrossAxisCount(
+                            crossAxisCount: 2, childAspectRatio: 0.6),
                     itemBuilder: (context, index) {
                       Book book = _books[index];
-                      return ListTile(
-                        title: Text(book.title),
-                        subtitle: Text(book.authors.join(', & ') ?? ''),
+                      return Container(
+                        decoration: BoxDecoration(
+                            color: Theme.of(context).colorScheme.surfaceVariant,
+                            borderRadius:
+                                const BorderRadius.all(Radius.circular(10))),
+                        child: Column(
+                          children: [
+                            Image.network(book.imageLinks['thumbnail'] ?? '')
+                          ],
+                        ),
                       );
-                    }),
-              ),
-            )
+                    }))
+            // Expanded(
+            //   child: SizedBox(
+            //     width: double.infinity,
+            //     child: ListView.builder(
+            //         itemCount: _books.length,
+            //         itemBuilder: (context, index) {
+            //           Book book = _books[index];
+            //           return ListTile(
+            //             title: Text(book.title),
+            //             subtitle: Text(book.authors.join(', & ') ?? ''),
+            //           );
+            //         }),
+            //   ),
+            // )
           ],
         ),
       ),
