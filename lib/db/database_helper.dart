@@ -1,4 +1,5 @@
 import 'package:path/path.dart';
+import 'package:reader_tracker/models/book.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:sqflite/sqlite_api.dart';
 
@@ -24,9 +25,8 @@ class DatabaseHelper {
         version: _databaseVersion, onCreate: _onCreate);
   }
 
-
   Future _onCreate(Database db, int version) async {
-      await db.execute('''
+    await db.execute('''
       CREATE TABLE $_tableName (
         id TEXT PRIMARY KEY,
         title TEXT NOT NULL,
@@ -42,5 +42,18 @@ class DatabaseHelper {
         infoLink TEXT
       )
     ''');
+  }
+
+  Future<int> insert(Book book) async {
+    Database db = await instance.database;
+    return await db.insert(_tableName, book.toJson());
+  }
+
+  Future<List<Book>> readAllBooks() async {
+    Database db = await instance.database;
+    var books = await db.query(_tableName);
+    return books.isNotEmpty
+        ? books.map((bookData) => Book.fromJsonDatabase(bookData)).toList()
+        : [];
   }
 }
