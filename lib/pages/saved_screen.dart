@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:reader_tracker/db/database_helper.dart';
+import 'package:reader_tracker/models/book.dart';
 
 class SavedScreen extends StatefulWidget {
   const SavedScreen({super.key});
@@ -14,6 +16,18 @@ class _SavedScreenState extends State<SavedScreen> {
       appBar: AppBar(
         title: const Text('Saved'),
       ),
+      body: FutureBuilder(
+          future: DatabaseHelper.instance.readAllBooks(),
+          builder: (context, snapshot) => snapshot.hasData
+              ? ListView.builder(
+                  itemCount: snapshot.data!.length,
+                  itemBuilder: (context, index) {
+                    Book book = snapshot.data![index];
+                    return ListTile(
+                      title: Text(book.title),
+                    );
+                  })
+              : const Center(child: CircularProgressIndicator())),
     );
   }
 }
