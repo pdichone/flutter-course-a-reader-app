@@ -59,15 +59,11 @@ class _BookDetailsScreenState extends State<BookDetailsScreen> {
                     'Language: ${book.language}',
                     style: theme.bodySmall,
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 10,
                   ),
-                  Row(
-                    mainAxisAlignment: !isFromSavedScreen
-                        ? MainAxisAlignment.spaceEvenly
-                        : MainAxisAlignment.center,
-                    children: [
-                      !isFromSavedScreen
+                  SizedBox(
+                      child: !isFromSavedScreen
                           ? ElevatedButton(
                               onPressed: () async {
                                 // save a book to the datase
@@ -83,16 +79,41 @@ class _BookDetailsScreenState extends State<BookDetailsScreen> {
                                 }
                               },
                               child: const Text('Save'))
-                          : const SizedBox(),
-                      SizedBox(
-                        height: 10,
-                      ),
-                      ElevatedButton.icon(
-                          onPressed: () async {},
-                          icon: const Icon(Icons.favorite),
-                          label: const Text('Favorite'))
-                    ],
-                  ),
+                          : ElevatedButton.icon(
+                              onPressed: () async {},
+                              icon: const Icon(Icons.favorite),
+                              label: const Text('Favorite'))),
+                  // Row(
+                  //   mainAxisAlignment: !isFromSavedScreen
+                  //       ? MainAxisAlignment.spaceEvenly
+                  //       : MainAxisAlignment.center,
+                  //   children: [
+                  //     !isFromSavedScreen
+                  //         ? ElevatedButton(
+                  //             onPressed: () async {
+                  //               // save a book to the datase
+                  //               try {
+                  //                 int savedInt = await DatabaseHelper.instance
+                  //                     .insert(book);
+                  //                 SnackBar snackBar = SnackBar(
+                  //                     content: Text("Book Saved $savedInt"));
+                  //                 ScaffoldMessenger.of(context)
+                  //                     .showSnackBar(snackBar);
+                  //               } catch (e) {
+                  //                 print("Error: $e");
+                  //               }
+                  //             },
+                  //             child: const Text('Save'))
+                  //         : const SizedBox(),
+                  //     SizedBox(
+                  //       height: 10,
+                  //     ),
+                  //     ElevatedButton.icon(
+                  //         onPressed: () async {},
+                  //         icon: const Icon(Icons.favorite),
+                  //         label: const Text('Favorite'))
+                  //   ],
+                  // ),
                   const SizedBox(
                     height: 10,
                   ),
