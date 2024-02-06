@@ -70,8 +70,8 @@ class _BookDetailsScreenState extends State<BookDetailsScreen> {
                                 try {
                                   int savedInt = await DatabaseHelper.instance
                                       .insert(book);
-                                  SnackBar snackBar = SnackBar(
-                                      content: Text("Book Saved $savedInt"));
+                                  SnackBar snackBar = const SnackBar(
+                                      content: Text("Book Saved"));
                                   ScaffoldMessenger.of(context)
                                       .showSnackBar(snackBar);
                                 } catch (e) {

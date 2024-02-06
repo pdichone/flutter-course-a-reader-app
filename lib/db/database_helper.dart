@@ -1,7 +1,6 @@
 import 'package:path/path.dart';
 import 'package:reader_tracker/models/book.dart';
 import 'package:sqflite/sqflite.dart';
-import 'package:sqflite/sqlite_api.dart';
 
 class DatabaseHelper {
   static const _databaseName = 'book_database.db';

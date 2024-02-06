@@ -37,7 +37,6 @@ class _SavedScreenState extends State<SavedScreen> {
                           trailing: IconButton(
                             icon: const Icon(Icons.delete),
                             onPressed: () {
-                              print("delete ${book.id}");
                               DatabaseHelper.instance.deleteBook(book.id);
                               setState(() {});
                             },

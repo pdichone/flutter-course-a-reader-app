@@ -19,7 +19,7 @@ class _FavoritesScreenState extends State<FavoritesScreen> {
           builder: (context, snapshot) {
             // print("OGj:: ${snapshot.data?.first}");
             if (snapshot.connectionState == ConnectionState.waiting) {
-              return Center(
+              return const Center(
                 child: CircularProgressIndicator(),
               );
             } else if (snapshot.hasError) {
@@ -46,7 +46,7 @@ class _FavoritesScreenState extends State<FavoritesScreen> {
                     );
                   });
             } else {
-              return Center(
+              return const Center(
                 child: Text('No favorite books found'),
               );
             }
