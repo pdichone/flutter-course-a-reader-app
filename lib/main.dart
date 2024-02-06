@@ -25,10 +25,10 @@ class MyApp extends StatelessWidget {
         ),
         initialRoute: '/',
         routes: {
-          '/home': (context) => const HomeScreen(),
-          '/saved': (context) => const SavedScreen(),
-          '/favorites': (context) => const FavoritesScreen(),
-          '/details': (context) => const BookDetailsScreen(),
+          '/home': (context) => HomeScreen(),
+          '/saved': (context) => SavedScreen(),
+          '/favorites': (context) => FavoritesScreen(),
+          '/details': (context) => BookDetailsScreen(),
         },
         home: const MyHomePage());
   }

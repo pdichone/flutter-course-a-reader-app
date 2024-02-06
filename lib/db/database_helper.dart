@@ -4,8 +4,8 @@ import 'package:sqflite/sqflite.dart';
 import 'package:sqflite/sqlite_api.dart';
 
 class DatabaseHelper {
-  static const _databaseName = 'books_database.db';
-  static const _databaseVersion = 2;
+  static const _databaseName = 'book_database.db';
+  static const _databaseVersion = 1;
   static const _tableName = 'books';
 
   DatabaseHelper._privateConstructor();
@@ -21,8 +21,11 @@ class DatabaseHelper {
   _initDatabase() async {
     //device/data/datasename.db
     String path = join(await getDatabasesPath(), _databaseName);
-    return await openDatabase(path,
-        version: _databaseVersion, onCreate: _onCreate);
+    return await openDatabase(
+      path,
+      version: _databaseVersion,
+      onCreate: _onCreate,
+    );
   }
 
   Future _onCreate(Database db, int version) async {
@@ -60,9 +63,12 @@ class DatabaseHelper {
 
   Future<int> toggleFavoriteStatus(String id, bool isFavorite) async {
     Database db = await instance.database;
-    return await db.update(_tableName, { 
-      'favorite': isFavorite ? 1 : 0},
-      where: 'id = ?',
-      whereArgs: [id]);
+    return await db.update(_tableName, {'favorite': isFavorite ? 1 : 0},
+        where: 'id = ?', whereArgs: [id]);
+  }
+
+  Future<int> deleteBook(String id) async {
+    Database db = await instance.database;
+    return await db.delete(_tableName, where: 'id = ?', whereArgs: [id]);
   }
 }

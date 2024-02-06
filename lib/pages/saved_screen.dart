@@ -13,9 +13,7 @@ class _SavedScreenState extends State<SavedScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Saved'),
-      ),
+      appBar: AppBar(),
       body: FutureBuilder(
           future: DatabaseHelper.instance.readAllBooks(),
           builder: (context, snapshot) => snapshot.hasData
@@ -23,10 +21,18 @@ class _SavedScreenState extends State<SavedScreen> {
                   itemCount: snapshot.data!.length,
                   itemBuilder: (context, index) {
                     Book book = snapshot.data![index];
+                    print("Books: ==> ${snapshot.data![index]}");
                     return Card(
                       child: ListTile(
                         title: Text(book.title),
-                        trailing: const Icon(Icons.delete),
+                        trailing: IconButton(
+                          icon: const Icon(Icons.delete),
+                          onPressed: () {
+                            print("delete ${book.id}");
+                            DatabaseHelper.instance.deleteBook(book.id);
+                            setState(() {});
+                          },
+                        ),
                         leading: Image.network(
                           book.imageLinks['thumbnail'] ?? '',
                           fit: BoxFit.cover,
@@ -37,6 +43,11 @@ class _SavedScreenState extends State<SavedScreen> {
                             ElevatedButton.icon(
                                 onPressed: () async {
                                   // toggle the favorite flag
+                                  await DatabaseHelper.instance
+                                      .toggleFavoriteStatus(
+                                          book.id, book.isFavorite)
+                                      .then((value) =>
+                                          print("Item Favored!!! $value"));
                                 },
                                 icon: const Icon(Icons.favorite),
                                 label: const Text('Add to Favorites'))
