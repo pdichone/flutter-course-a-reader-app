@@ -16,6 +16,8 @@ class _BookDetailsScreenState extends State<BookDetailsScreen> {
     final args =
         ModalRoute.of(context)?.settings.arguments as BookDetailsArguments;
     final Book book = args.itemBook;
+    final bool isFromSavedScreen = args.isFromSavedScreen;
+
     final theme = Theme.of(context).textTheme;
 
     return Scaffold(
@@ -57,28 +59,38 @@ class _BookDetailsScreenState extends State<BookDetailsScreen> {
                     'Language: ${book.language}',
                     style: theme.bodySmall,
                   ),
+                  SizedBox(
+                    height: 10,
+                  ),
                   Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    mainAxisAlignment: !isFromSavedScreen
+                        ? MainAxisAlignment.spaceEvenly
+                        : MainAxisAlignment.center,
                     children: [
-                      ElevatedButton(
-                          onPressed: () async {
-                            // save a book to the datase
-                            try {
-                              int savedInt =
-                                  await DatabaseHelper.instance.insert(book);
-                              SnackBar snackBar = SnackBar(
-                                  content: Text("Book Saved $savedInt"));
-                              ScaffoldMessenger.of(context)
-                                  .showSnackBar(snackBar);
-                            } catch (e) {
-                              print("Error: $e");
-                            }
-                          },
-                          child: Text('Save')),
+                      !isFromSavedScreen
+                          ? ElevatedButton(
+                              onPressed: () async {
+                                // save a book to the datase
+                                try {
+                                  int savedInt = await DatabaseHelper.instance
+                                      .insert(book);
+                                  SnackBar snackBar = SnackBar(
+                                      content: Text("Book Saved $savedInt"));
+                                  ScaffoldMessenger.of(context)
+                                      .showSnackBar(snackBar);
+                                } catch (e) {
+                                  print("Error: $e");
+                                }
+                              },
+                              child: const Text('Save'))
+                          : const SizedBox(),
+                      SizedBox(
+                        height: 10,
+                      ),
                       ElevatedButton.icon(
                           onPressed: () async {},
-                          icon: Icon(Icons.favorite),
-                          label: Text('Favorite'))
+                          icon: const Icon(Icons.favorite),
+                          label: const Text('Favorite'))
                     ],
                   ),
                   const SizedBox(
@@ -92,8 +104,8 @@ class _BookDetailsScreenState extends State<BookDetailsScreen> {
                     height: 5,
                   ),
                   Container(
-                    margin: EdgeInsets.all(10),
-                    padding: EdgeInsets.all(10),
+                    margin: const EdgeInsets.all(10),
+                    padding: const EdgeInsets.all(10),
                     decoration: BoxDecoration(
                         color: Theme.of(context)
                             .colorScheme

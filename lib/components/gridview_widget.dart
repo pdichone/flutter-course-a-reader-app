@@ -28,7 +28,8 @@ class GridViewWidget extends StatelessWidget {
                   onTap: () {
                     // Navigate to the details screen
                     Navigator.pushNamed(context, '/details',
-                        arguments: BookDetailsArguments(itemBook: book));
+                        arguments: BookDetailsArguments(
+                            itemBook: book, isFromSavedScreen: false));
                     // Navigator.push(
                     //     context,
                     //     MaterialPageRoute(

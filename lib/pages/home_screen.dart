@@ -22,11 +22,7 @@ class _HomeScreenState extends State<HomeScreen> {
       setState(() {
         _books = books;
       });
-
-      // print("Books: ${books.toString()}");
-    } catch (e) {
-      
-    }
+    } catch (e) {}
     setState(() {}); // go ahead and rebuild the widget
   }
 
