@@ -39,7 +39,8 @@ class _FavoritesScreenState extends State<FavoritesScreen> {
                           book.imageLinks['thumbnail'] ?? '',
                           fit: BoxFit.cover,
                         ),
-                        title: Text(book.authors.join(', ')),
+                        title: Text(book.title),
+                        subtitle: Text(book.authors.join(', ')),
                         trailing: const Icon(Icons.favorite, color: Colors.red),
                       ),
                     );

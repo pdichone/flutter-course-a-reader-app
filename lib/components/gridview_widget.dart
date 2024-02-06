@@ -30,11 +30,6 @@ class GridViewWidget extends StatelessWidget {
                     Navigator.pushNamed(context, '/details',
                         arguments: BookDetailsArguments(
                             itemBook: book, isFromSavedScreen: false));
-                    // Navigator.push(
-                    //     context,
-                    //     MaterialPageRoute(
-                    //         builder: (contex) =>
-                    //             const BookDetailsScreen()));
                   },
                   child: Column(
                     children: [

@@ -22,6 +22,8 @@ class _SavedScreenState extends State<SavedScreen> {
                   itemCount: snapshot.data!.length,
                   itemBuilder: (context, index) {
                     Book book = snapshot.data![index];
+                    // get each books fav status
+
                     //print("Books: ==> ${snapshot.data![index].toString()}");
                     return InkWell(
                       onTap: () {
@@ -50,14 +52,22 @@ class _SavedScreenState extends State<SavedScreen> {
                               ElevatedButton.icon(
                                   onPressed: () async {
                                     // toggle the favorite flag
+                                    book.isFavorite = !book.isFavorite;
                                     await DatabaseHelper.instance
                                         .toggleFavoriteStatus(
-                                            book.id, !book.isFavorite)
-                                        .then((value) =>
-                                            print("Item Favored!!! $value"));
+                                            book.id, book.isFavorite);
+                                    //refresh th UI
+                                    setState(() {});
                                   },
-                                  icon: const Icon(Icons.favorite),
-                                  label: const Text('Add to Favorites'))
+                                  icon: Icon(
+                                    book.isFavorite
+                                        ? Icons.favorite
+                                        : Icons.favorite_outline,
+                                    color: book.isFavorite ? Colors.red : null,
+                                  ),
+                                  label: Text((book.isFavorite)
+                                      ? 'Favorite'
+                                      : 'Add to Favorites'))
                             ],
                           ),
                         ),
