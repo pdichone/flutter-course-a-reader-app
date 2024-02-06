@@ -21,7 +21,7 @@ class _SavedScreenState extends State<SavedScreen> {
                   itemCount: snapshot.data!.length,
                   itemBuilder: (context, index) {
                     Book book = snapshot.data![index];
-                    print("Books: ==> ${snapshot.data![index]}");
+                    print("Books: ==> ${snapshot.data![index].toString()}");
                     return Card(
                       child: ListTile(
                         title: Text(book.title),
@@ -45,7 +45,7 @@ class _SavedScreenState extends State<SavedScreen> {
                                   // toggle the favorite flag
                                   await DatabaseHelper.instance
                                       .toggleFavoriteStatus(
-                                          book.id, book.isFavorite)
+                                          book.id, !book.isFavorite)
                                       .then((value) =>
                                           print("Item Favored!!! $value"));
                                 },

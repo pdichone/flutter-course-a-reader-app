@@ -71,4 +71,15 @@ class DatabaseHelper {
     Database db = await instance.database;
     return await db.delete(_tableName, where: 'id = ?', whereArgs: [id]);
   }
+
+  // Get favorite books
+  Future<List<Book>> getFavorites() async {
+    Database db = await instance.database;
+    var favBooks =
+        await db.query(_tableName, where: 'favorite = ?', whereArgs: [1]);
+
+    return favBooks.isNotEmpty
+        ? favBooks.map((bookData) => Book.fromJsonDatabase(bookData)).toList()
+        : [];
+  }
 }
